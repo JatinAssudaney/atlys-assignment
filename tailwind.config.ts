@@ -15,8 +15,11 @@ const config: Config = {
         'primary-text': 'var(--text-primary)',
         'secondary-text': 'var(--text-secondary)',
         'tertiary-text': 'var(--text-tertiary)',
-        'section-background': 'var(--section-background)',
         primary: 'var(--cta-primary)',
+      },
+      backgroundColor: {
+        'main-background': 'var(--background)',
+        'section-background': 'var(--section-background)',
       },
       backgroundImage: {
         'custom-gradient':
@@ -27,6 +30,9 @@ const config: Config = {
       },
       outlineColor: {
         primary: 'var(--cta-primary)',
+      },
+      fontSize: {
+        '2xl': ['1.75rem', { lineHeight: '2.125rem' }],
       },
     },
   },

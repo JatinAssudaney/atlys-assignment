@@ -17,6 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/atlys.svg" />
+      </head>
       <body className={twMerge(inter.className, 'dark')}>{children}</body>
     </html>
   );
