@@ -8,10 +8,25 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      letterSpacing: {
+        wide: '.03em',
+      },
+      colors: {
+        'primary-text': 'var(--text-primary)',
+        'secondary-text': 'var(--text-secondary)',
+        'tertiary-text': 'var(--text-tertiary)',
+        'section-background': 'var(--section-background)',
+        primary: 'var(--cta-primary)',
+      },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'custom-gradient':
+          'linear-gradient(129.59deg, #969696 0%, #343434 98.18%)',
+      },
+      borderColor: {
+        'primary-border': 'var(--border-primary)',
+      },
+      outlineColor: {
+        primary: 'var(--cta-primary)',
       },
     },
   },

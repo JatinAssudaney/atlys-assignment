@@ -3,12 +3,18 @@
 @tailwind utilities;
 
 .dark {
-  --background: 25, 25, 32;
+  --background: #131319;
+  --section-background: #27292d;
 
-  --text-primary: 197, 199, 202;
-  --text-secondary: 127, 128, 132;
+  --border-primary: #35373b;
 
-  --cta-text: 255, 255, 255;
+  --text-primary: #c5c7ca;
+  --text-secondary: #7f8084;
+  --text-tertiary: #6b6c70;
 
-  background: rgba(var(--background));
+  --cta-text: #fff;
+  --cta-primary: #4a96ff;
+
+  background: var(--background);
+  color: var(--cta-text);
 }
