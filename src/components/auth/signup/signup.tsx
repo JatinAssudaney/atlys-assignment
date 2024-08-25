@@ -89,7 +89,7 @@ const Signup = (props: SignupProps) => {
   };
 
   return (
-    <section className="flex flex-col min-h-fit items-center p-0.5 rounded-lg min-w-[420px] w-1/3 bg-custom-gradient">
+    <section className="flex flex-col min-h-fit items-center p-0.5 rounded-lg w-1/3 bg-custom-gradient min-w-[90vw] sm:min-w-[463px]">
       <div className="flex flex-col gap-12 h-full w-full rounded-lg bg-section-background px-6 py-10">
         <div className="flex flex-col text-center gap-2">
           <h5 className="uppercase text-tertiary-text text-sm tracking-wide">

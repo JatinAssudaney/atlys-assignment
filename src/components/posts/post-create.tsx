@@ -47,12 +47,12 @@ const PostCreate = () => {
             <input
               type="text"
               placeholder="How are you feeling today?"
-              className="bg-transparent flex-1 border-none text-secondary-text outline-none font-normal text-base"
+              className="bg-transparent flex-1 border-none text-secondary-text outline-none font-normal text-base w-full"
             />
           </div>
           <Button
             type="button"
-            className="place-self-end w-1/6"
+            className="place-self-end w-[111px]"
             onClick={handleSubmit}
           >
             Post
