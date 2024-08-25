@@ -3,7 +3,7 @@
 ## Demo
 
 > [!NOTE]
-> The Demo gif is compressed, so it doesn't display the actual UI properly. Check [Live Preview]([https://](https://atlys-visa-assignment.vercel.app/))
+> The Demo gif is compressed, so it doesn't display the actual UI properly. Check [Live Preview](https://atlys-visa-assignment.vercel.app/)
 
 ![web-demo](/assets/assignment-demo.gif)
 
