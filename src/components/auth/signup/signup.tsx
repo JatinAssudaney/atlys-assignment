@@ -54,12 +54,6 @@ const Signup = (props: SignupProps) => {
       const username = formData.username;
       const password = formData.password;
 
-      console.log(`🚀 ~ file: signup.tsx:55 ~ handleSubmit ~ email:`, {
-        email,
-        username,
-        password,
-      });
-
       // validate the data and based on validation return errors in message
       let isInvalid = false;
       if (isInvalid) {
@@ -154,7 +148,7 @@ const Signup = (props: SignupProps) => {
               <button
                 type="button"
                 onClick={onClientAuthToggle}
-                className="bg-transparent flex items-center gap-1"
+                className="cursor-pointer text-sm text-primary-text bg-transparent flex items-center gap-1"
               >
                 <RedirectToSignin />
               </button>

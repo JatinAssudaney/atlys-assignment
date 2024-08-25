@@ -21,11 +21,16 @@ function Input(props: InputProps) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between text-primary-text font-medium text-sm">
-        <label htmlFor={id}>{label}</label>
+        <label className="cursor-pointer" htmlFor={id}>
+          {label}
+        </label>
         {secondaryLabel ? (
           <label
             {...secondaryLabel}
-            className={twMerge('text-xs', secondaryLabel.className)}
+            className={twMerge(
+              'text-xs cursor-pointer',
+              secondaryLabel.className
+            )}
           />
         ) : null}
       </div>

@@ -151,7 +151,7 @@ const Signin = (props: SigninProps) => {
               <button
                 type="button"
                 onClick={onClientAuthToggle}
-                className="bg-transparent flex items-center gap-1"
+                className="cursor-pointer text-sm text-primary-text bg-transparent flex items-center gap-1"
               >
                 <RedirectToSignup />
               </button>
