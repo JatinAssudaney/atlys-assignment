@@ -34,6 +34,9 @@ const config: Config = {
       fontSize: {
         '2xl': ['1.75rem', { lineHeight: '2.125rem' }],
       },
+      animation: {
+        'open-modal': '300ms ease-out',
+      },
     },
   },
   plugins: [],
