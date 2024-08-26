@@ -9,6 +9,10 @@ import { FormEvent, useState } from 'react';
 // import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import paths from '@/paths';
+import {
+  signinUser,
+  SigninUserFormState,
+} from '@/models/interfaces/auth.interface';
 
 interface SigninProps {
   onClientAuthToggle?: () => void;
@@ -44,7 +48,12 @@ const Signin = (props: SigninProps) => {
     emailOrUsername: '',
     password: '',
   });
-  const [formState, setFormState] = useState({ message: '' });
+
+  const disableSubmit =
+    !formData.emailOrUsername || !formData.password ? true : false;
+  const [formState, setFormState] = useState<SigninUserFormState>({
+    errors: {},
+  });
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => {
@@ -58,9 +67,14 @@ const Signin = (props: SigninProps) => {
       const password = formData.password;
 
       // validate the data and based on validation return errors in message
-      let isInvalid = false;
-      if (isInvalid) {
-        setFormState({ message: '' });
+      const result = signinUser.safeParse({
+        emailOrUsername,
+        password,
+      });
+
+      if (!result.success) {
+        const errors = { errors: result.error.flatten().fieldErrors };
+        setFormState(errors);
         return;
       }
 
@@ -69,19 +83,15 @@ const Signin = (props: SigninProps) => {
       // sigin failed return error message
       let signinFailed = false;
       if (signinFailed) {
-        setFormState({ message: '' });
+        setFormState({ errors: { _form: ['Unable to signin at the moment'] } });
         return;
       }
     } catch (error) {
       if (error instanceof Error) {
-        setFormState({
-          message: error.message,
-        });
+        setFormState({ errors: { _form: [error.message] } });
         return;
       } else {
-        setFormState({
-          message: 'Something went wrong...',
-        });
+        setFormState({ errors: { _form: ['Something went wrong'] } });
         return;
       }
     }
@@ -113,6 +123,8 @@ const Signin = (props: SigninProps) => {
                   emailOrUsername: event.target.value,
                 }))
               }
+              isInvalid={!!formState.errors.emailOrUsername}
+              errorMessage={formState.errors.emailOrUsername}
             />
             <Input
               type={showPassword ? 'text' : 'password'}
@@ -127,6 +139,8 @@ const Signin = (props: SigninProps) => {
                   password: event.target.value,
                 }))
               }
+              isInvalid={!!formState.errors.password}
+              errorMessage={formState.errors.password}
               secondaryLabel={{
                 htmlFor: 'password',
                 children: 'Forgot password?',
@@ -142,9 +156,18 @@ const Signin = (props: SigninProps) => {
                 />
               }
             />
+            {formState.errors._form ? (
+              <div className="text-sm text-red-500 flex flex-col">
+                {formState.errors._form?.join(', ')}
+              </div>
+            ) : null}
           </div>
           <div className="flex flex-col gap-3">
-            <Button type="submit" onSubmit={handleSubmit}>
+            <Button
+              type="submit"
+              disabled={disableSubmit}
+              className={disableSubmit ? 'opacity-50 cursor-not-allowed' : ''}
+            >
               Login now
             </Button>
             {onClientAuthToggle ? (

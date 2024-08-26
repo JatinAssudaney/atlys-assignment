@@ -6,6 +6,7 @@
 ![Typescript](https://img.shields.io/badge/Typescript-007acc?style=for-the-badge&labelColor=black&logo=typescript&logoColor=007acc)
 ![Javascript](https://img.shields.io/badge/Javascript-F0DB4F?style=for-the-badge&labelColor=black&logo=javascript&logoColor=F0DB4F)
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-092749?style=for-the-badge&logo=tailwindcss&logoColor=06B6D4&labelColor=000000)
+![Zod](https://img.shields.io/badge/Zod-000000?style=for-the-badge&logo=zod&logoColor=3068B7)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
@@ -45,3 +46,27 @@
    4. `models`: Contains the models used in the App i.e constants, interfaces.
    5. `utils`: Contains util function that are used within the App.
    6. `paths.ts`: Contains all the paths that are defined for our App.
+
+## Validation
+> [!NOTE]
+> Validation are added in signin and signup forms using [zod](https://zod.dev/)
+
+### Existing Validations
+1. Signin Form
+   1.  Email/Username must be at least 3 characters long
+   2.  Password must be at least 8 characters long
+2.  Signup Form
+    1.  Email validation using zod
+    2.  Username must be at least 3 characters long
+    3.  Username must be no more than 20 characters long
+    4.  Username can only contain letters, numbers, underscores, and periods
+    5.  Password must be at least 8 characters long
+
+
+> [!NOTE]
+> Some password validations have been commented for ease of use for demo
+## Commented Validations
+1. Password must contain at least one uppercase letter
+2. Password must contain at least one lowercase letter
+3. Password must contain at least one number
+4. Password must contain at least one special character
