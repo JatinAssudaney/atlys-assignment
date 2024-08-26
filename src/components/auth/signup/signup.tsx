@@ -9,6 +9,10 @@ import Image from 'next/image';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import paths from '@/paths';
+import {
+  signupUser,
+  SignupUserFormState,
+} from '@/models/interfaces/auth.interface';
 
 interface SignupProps {
   onClientAuthToggle?: () => void;
@@ -45,7 +49,12 @@ const Signup = (props: SignupProps) => {
     username: '',
     password: '',
   });
-  const [formState, setFormState] = useState({ message: '' });
+
+  const disableSubmit =
+    !formData.email || !formData.username || !formData.password ? true : false;
+  const [formState, setFormState] = useState<SignupUserFormState>({
+    errors: {},
+  });
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -55,9 +64,16 @@ const Signup = (props: SignupProps) => {
       const password = formData.password;
 
       // validate the data and based on validation return errors in message
-      let isInvalid = false;
-      if (isInvalid) {
-        setFormState({ message: '' });
+      const result = signupUser.safeParse({
+        email,
+        username,
+        password,
+      });
+
+      // validate the data and based on validation return errors in message
+      if (!result.success) {
+        const errors = { errors: result.error.flatten().fieldErrors };
+        setFormState(errors);
         return;
       }
 
@@ -66,19 +82,15 @@ const Signup = (props: SignupProps) => {
       // sigin failed return error message
       let signupFailed = false;
       if (signupFailed) {
-        setFormState({ message: '' });
+        setFormState({ errors: { _form: ['Unable to signin at the moment'] } });
         return;
       }
     } catch (error) {
       if (error instanceof Error) {
-        setFormState({
-          message: error.message,
-        });
+        setFormState({ errors: { _form: [error.message] } });
         return;
       } else {
-        setFormState({
-          message: 'Something went wrong...',
-        });
+        setFormState({ errors: { _form: ['Something went wrong'] } });
         return;
       }
     }
@@ -113,6 +125,8 @@ const Signup = (props: SignupProps) => {
                   email: event.target.value,
                 }))
               }
+              isInvalid={!!formState.errors.email}
+              errorMessage={formState.errors.email}
             />
             <Input
               id="username"
@@ -126,6 +140,8 @@ const Signup = (props: SignupProps) => {
                   username: event.target.value,
                 }))
               }
+              isInvalid={!!formState.errors.username}
+              errorMessage={formState.errors.username}
             />
             <Input
               type="password"
@@ -140,10 +156,23 @@ const Signup = (props: SignupProps) => {
                   password: event.target.value,
                 }))
               }
+              isInvalid={!!formState.errors.password}
+              errorMessage={formState.errors.password}
             />
+            {formState.errors._form ? (
+              <div className="text-sm text-red-500 flex flex-col">
+                {formState.errors._form?.join(', ')}
+              </div>
+            ) : null}
           </div>
           <div className="flex flex-col gap-3">
-            <Button type="submit">Continue</Button>
+            <Button
+              type="submit"
+              disabled={disableSubmit}
+              className={disableSubmit ? 'opacity-50 cursor-not-allowed' : ''}
+            >
+              Continue
+            </Button>
             {onClientAuthToggle ? (
               <button
                 type="button"
